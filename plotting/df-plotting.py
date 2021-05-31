@@ -5,6 +5,7 @@ import os
 import glob
 from matplotlib.patches import Polygon
 import pandas as pd
+plt.rcParams.update({'font.size': 22})
 
 benchmark_tests = ('aes', 'dhrystone', 'norx', 'primes', 'qsort', 'sha512')
 #benchmark_tests = ["sha512"]
@@ -29,11 +30,11 @@ for test in benchmark_tests:
 df = df.set_index('rv8-benchmarks')
 
 
-ax = df.plot.bar( rot=0, color={ 'vanilla_base': 'gold', 'spicy_base' : 'khaki', 'vanilla_keystone' : 'darkolivegreen', 'spicy_keystone': 'darkkhaki' } )
+ax = df.plot.bar( rot=0, color={ 'vanilla_base': 'gold', 'spicy_base' : 'khaki', 'vanilla_keystone' : 'darkolivegreen', 'spicy_keystone': 'darkkhaki' }, figsize=(18,10) )
 ax.legend( ['ref. native', 'prop. native', 'ref. keystone', 'prop. keystone'] )
 
 ax.set_ylabel('latency [cycles]')
 
-
+print(df)
 
 plt.show()

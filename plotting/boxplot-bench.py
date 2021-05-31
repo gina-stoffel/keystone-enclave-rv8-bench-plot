@@ -13,13 +13,14 @@ bench_names = ('vanilla_base', 'spicy_base', 'vanilla_keystone', 'spicy_keystone
 # bench_names = ('vanilla_base', 'spicy_base' )
 
 df = pd.DataFrame(columns=['Binary', 'Env', 'Measurements'])
+plt.rcParams.update({'font.size': 22})
 
 for test in benchmark_tests:
     print(test)
 
     # ax0: base runs    ax1: keystone runs
-    fig, (ax0, ax1) = plt.subplots(1, 2, figsize=(15, 7))
-    fig.suptitle(test, fontsize=12)
+    fig, (ax0, ax1) = plt.subplots(1, 2, figsize=(25, 10))
+    #fig.suptitle(test, fontsize=12)
 
     # iterate over all kinds of measurements
     for bench in bench_names:
@@ -42,26 +43,26 @@ for test in benchmark_tests:
 
 
     ax0.ticklabel_format(useOffset=False)
-    bp0 = ax0.boxplot(df['Measurements'][:2], showfliers=True)
+    bp0 = ax0.boxplot(df['Measurements'][:2], showfliers=False)
     plt.setp(bp0['boxes'], color='#D7191C')
     plt.setp(bp0['whiskers'], color='#D7191C')
     plt.setp(bp0['caps'], color='#D7191C')
     plt.setp(bp0['medians'], color='#D7191C')
 
     ax0.set_xticks([1,2])
-    ax0.set_xticklabels(['reference', 'proposal'], fontsize=12)
+    ax0.set_xticklabels(['reference', 'proposal'])
     ax0.set_title('Run as plain binary')
     ax0.set_ylabel('latency [cycles]')
 
     ax1.ticklabel_format(useOffset=False)
-    bp1 = ax1.boxplot(df['Measurements'][2:4], showfliers=True)
+    bp1 = ax1.boxplot(df['Measurements'][2:4], showfliers=False)
     plt.setp(bp1['boxes'], color='#2C7BB6')
     plt.setp(bp1['whiskers'], color='#2C7BB6')
     plt.setp(bp1['caps'], color='#2C7BB6')
     plt.setp(bp1['medians'], color='#2C7BB6')
 
     ax1.set_xticks([1,2])
-    ax1.set_xticklabels(['reference', 'proposal'], fontsize=12)
+    ax1.set_xticklabels(['reference', 'proposal'])
     ax1.set_title('Run as Keystone enclave')
     ax1.set_ylabel('latency [cycles]')
     
